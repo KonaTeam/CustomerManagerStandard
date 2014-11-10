@@ -93,6 +93,24 @@ app.all('*', function(req, res, next){
     }
 });
 
+app.get('/api/kona/spaces', function (req, res) {
+    request({
+        url: kona_api_base + '/api/spaces',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + req.session.token
+        }
+    }, function(error, response, body) {
+        if (!error && response.statusCode == 200) {
+            console.log('get /api/kona/spaces', req.session.token);
+            res.send(body);
+        }else{
+            res.status(403).send('Not Authorized')
+        }
+    });
+});
+
+
 //
 
 app.set('view engine', 'jade');

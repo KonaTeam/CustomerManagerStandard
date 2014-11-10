@@ -1,10 +1,10 @@
 ﻿(function () {
 
-    var injectParams = ['$scope', '$location', '$routeParams',
-                        '$timeout', 'config', 'dataService', 'modalService'];
+    var injectParams = ['$scope', '$location', '$routeParams', 
+                        '$timeout', 'config', 'dataService', 'modalService', '$http'];
 
     var CustomerEditController = function ($scope, $location, $routeParams,
-                                           $timeout, config, dataService, modalService) {
+                                           $timeout, config, dataService, modalService, $http) {
 
         var customerId = ($routeParams.customerId) ? parseInt($routeParams.customerId) : 0,
             timer,
@@ -16,6 +16,20 @@
         $scope.buttonText = (customerId > 0) ? 'Update' : 'Add';
         $scope.updateStatus = false;
         $scope.errorMessage = '';
+
+
+        $scope.spaces = [];
+
+        var token = getCookie('user.token');
+
+        if(token){
+            $http.get('/api/kona/spaces')
+            .success(function(data, status, headers, config) {
+                $scope.spaces = data.spaces;
+                console.log("Kona API Spaces", $scope.spaces);
+            })
+        }
+        
 
         $scope.isStateSelected = function (customerStateId, stateId) {
             return customerStateId === stateId;
@@ -133,6 +147,6 @@
 
     CustomerEditController.$inject = injectParams;
 
-    angular.module('customersApp').controller('CustomerEditController', CustomerEditController);
-
+    angular.module('customersApp').controller('CustomerEditController', CustomerEditController)
+    
 }());
