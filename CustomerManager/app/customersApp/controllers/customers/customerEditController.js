@@ -58,10 +58,15 @@
             if (customerId > 0) {
                 dataService.getCustomer(customerId).then(function (customer) {
                     $scope.customer = customer;
+                    if(typeof customer.space !== "undefined")
+                        changeKonaSpace(customer.space);
+                    else
+                        changeKonaSpace(-1);
                 }, processError);
             } else {
                 dataService.newCustomer().then(function (customer) {
                     $scope.customer = customer;
+                    changeKonaSpace(-1);
                 });
 
             }

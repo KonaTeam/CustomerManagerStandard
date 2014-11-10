@@ -84,6 +84,7 @@ module.exports = {
         customer.state = s;
         customer.stateId = state[0].id;
         customer.zip = req_body.zip;
+        customer.space = req_body.space;
         customer.gender = req_body.gender;
         customer.id = 1; // The id is calculated by the Mongoose pre 'save'.
 
@@ -110,6 +111,7 @@ module.exports = {
             customer.state = s;
             customer.stateId = s.id;
             customer.zip = req_body.zip || customer.zip;
+            customer.space = req_body.space || customer.space;
             customer.gender = req_body.gender || customer.gender;
 
 

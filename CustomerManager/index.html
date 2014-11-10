@@ -52,6 +52,73 @@
         </nav>
     </header>
 
+    <div id="kona" style="position: absolute; top: 50px; bottom: 0px; right: -3px; z-index: 100;">
+        <div id="myContainer" style="width: 440px; height: 100%;"></div>
+        <script>
+            function getCookie(name){
+                if (document.cookie.length > 0) {
+                    var index = document.cookie.indexOf(name+"="); 
+                    if (index != -1) {
+                        index += name.length+1; 
+                        var end = document.cookie.indexOf(";", index);
+                        if (end == -1) 
+                            end = document.cookie.length;
+                        return unescape(document.cookie.substring(index, end)); 
+                    } 
+                }
+                return null;
+            }
+
+          (function() {
+            window._konaWidgetConfig = {
+              id: "conversationsiFrame",
+              key: '223f0b83211cd6997c7e73a14f84c1b65036a74647e6b56418780e20fda613b9',
+              domain: 'io.kona.com',
+              oauth_token: 'access_token',
+              container_id: 'myContainer',
+              // default_space: '0',
+              disable_spaces: 'true',
+              disable_people: 'true',
+              theme: 'light'
+            };
+
+            var spaceChange = function(){
+              document.getElementById("spaceIdChanger").onchange = function() {
+                var win = document.getElementById(window._konaWidgetConfig.id).contentWindow;
+                win.postMessage(
+                  this.value,
+                  "https://" + window._konaWidgetConfig.domain
+                );
+                return false;
+              }
+            };
+
+            var script = document.createElement('script');
+            script.src = 'https://' + window._konaWidgetConfig.domain + '/kona/widgets/kona_widget_loader.js?conversations';
+            var insertLocation = document.getElementsByTagName('script')[0];
+            insertLocation.parentNode.insertBefore(script, insertLocation);
+            if (script.addEventListener) {
+              return script.addEventListener('load', spaceChange, false);
+            } else {
+              return script.attachEvent('onreadystatechange', function() {
+                if (/complete|loaded/.test(script.readyState)) {
+                  return spaceChange();
+                }
+              });
+            }            
+          })();
+
+        var changeKonaSpace = function(space_id){
+            var win = document.getElementById(window._konaWidgetConfig.id).contentWindow;
+            win.postMessage(
+              space_id,
+              "https://" + window._konaWidgetConfig.domain
+            );
+        }
+
+        </script>
+    </div>
+
     <div class="slide-animation-container">
         <div data-ng-view id="ng-view" class="slide-animation"></div>
     </div>

@@ -57,6 +57,9 @@ var CustomerSchema = new Schema({
   zip : {
     type : Number, required: true
   },
+  space : {
+    type : Number
+  },
   gender : {
     type : String,
   },

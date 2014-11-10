@@ -134,6 +134,15 @@
                 </div>
                 <br />
                 <div class="row">
+                    <div class="col-md-2">
+                        Kona Space ID:
+                    </div>
+                    <div class="col-md-10">
+                        <input type="number" name="space" class="form-control" data-ng-model="customer.space" id="spaceIdChanger" />
+                    </div>
+                </div>
+                <br />
+                <div class="row">
                     <div class="col-md-12">
                         <button type="submit" class="btn btn-primary" data-ng-click="saveCustomer()" 
                                 ng-disabled="editForm.$invalid || !editForm.$dirty">{{buttonText}}</button>
