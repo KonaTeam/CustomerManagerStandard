@@ -24,9 +24,10 @@
         };
 
         function redirectToLogin() {
-            var path = '/login' + $location.$$path;
-            $location.replace();
-            $location.path(path);
+            // var path = '/login' + $location.$$path;
+            // $location.replace();
+            // $location.path(path);
+            window.location.href = '/auth'
         }
 
         $scope.$on('loginStatusChanged', function (loggedIn) {

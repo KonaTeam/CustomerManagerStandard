@@ -160,7 +160,9 @@ exports.login = function (req, res) {
 exports.logout = function (req, res) {
     console.log('*** logout');
 
-    //Simulate logout
+    req.session.token = undefined;
+    req.session.user  = undefined;
+
     res.json({ status: true });
 };
 

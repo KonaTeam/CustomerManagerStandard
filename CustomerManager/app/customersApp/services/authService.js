@@ -7,7 +7,7 @@
             factory = {
                 loginPath: '/login',
                 user: {
-                    isAuthenticated: false,
+                    isAuthenticated: true,  //disable built in auth
                     roles: null
                 }
             };
